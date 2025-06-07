@@ -496,9 +496,6 @@ def timer(im1, t1):
                         out = True
                         checkwhen = 2
                         im_array_pre[i][j] = [255, 255, 0]
-                        if len(pre_4deg_check_points) == 0:
-                            continue  # or break
-
                         t = (
                             4 / speed_now * (1 + k) / len(pre_4deg_check_points)
                             - press_and_release_delay
@@ -694,7 +691,6 @@ def main():
     if not os.path.exists(imgdir):
         os.mkdir(imgdir)
     keyboard.on_press(keyboard_callback)
-    threading.Thread(target=keyboard.wait)
     print("starting")
     driver()
 
