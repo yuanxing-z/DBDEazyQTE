@@ -1,12 +1,10 @@
 @echo off
-REM Navigate to script directory
 cd /d "%~dp0"
 
-REM Initialize Conda for the current shell session
-call "%USERPROFILE%\anaconda3\Scripts\activate.bat"
+REM 使用 conda.bat 启动环境
+call "%USERPROFILE%\anaconda3\condabin\conda.bat" activate DBDEazyQTE-main
 
-REM Activate your Conda environment (replace name if needed)
-call conda activate DBDEazyQTE-main
-
-REM Run the script
+REM 执行 Python 脚本
 python DBDEazyQTE.py
+
+pause
