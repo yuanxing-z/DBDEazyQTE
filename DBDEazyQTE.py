@@ -31,7 +31,7 @@ red_sensitive = 180
 focus_level = 0
 
 WHITE = [255, 255, 255]
-BLUE = [0, 0, 255]
+RED = [0, 0, 255]
 
 
 def sleep(t):
@@ -164,7 +164,7 @@ def find_square(im_array):
                     im_array[i][j] = [0, 0, 0]
                     continue
                 target_points.append((i, j))
-                im_array[i][j] = BLUE
+                im_array[i][j] = RED
 
     if not target_points:
         return
@@ -186,7 +186,7 @@ def find_square(im_array):
         pre_i = round(r_i - sin * i)
         pre_j = round(r_j - cos * i)
         if 0 <= pre_i < shape[0] and 0 <= pre_j < shape[1]:
-            if list(im_array[pre_i][pre_j]) == BLUE:
+            if list(im_array[pre_i][pre_j]) == RED:
                 pre_d = i
             else:
                 break
@@ -197,7 +197,7 @@ def find_square(im_array):
         pre_i = round(r_i + sin * i)
         pre_j = round(r_j + cos * i)
         if 0 <= pre_i < shape[0] and 0 <= pre_j < shape[1]:
-            if list(im_array[pre_i][pre_j]) == BLUE:
+            if list(im_array[pre_i][pre_j]) == RED:
                 post_d = i
             else:
                 break
@@ -245,7 +245,7 @@ def find_square(im_array):
         round((pre_white[0] + post_white[0]) / 2),
         round((pre_white[1] + post_white[1]) / 2),
     )
-    if list(im_array[new_white[0]][new_white[1]]) != BLUE:
+    if list(im_array[new_white[0]][new_white[1]]) != RED:
         print("new white error")
         return
 
