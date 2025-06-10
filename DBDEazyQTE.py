@@ -1,12 +1,14 @@
-import keyboard
-import pyautogui
-import time
-import win32gui, win32ui, win32con
-import threading
-import numpy as np
-from PIL import Image
-import winsound
 import math
+import time
+import winsound
+
+import keyboard
+import numpy as np
+import pyautogui
+import win32con
+import win32gui
+import win32ui
+from PIL import Image
 
 imgdir = "DBDimg/"
 delay_degree = 0
@@ -246,7 +248,6 @@ def find_square(im_array):
     if list(im_array[new_white[0]][new_white[1]]) != BLUE:
         print("new white error")
         return
-    #
 
     return new_white, pre_white, post_white
 
@@ -280,7 +281,6 @@ def wiggle(t1, deg1, direction, im1):
         Image.fromarray(im1).save(imgdir + "log.png")
         sleep(0.13)
     except ValueError as e:
-
         # winsound.Beep(230,300)
         print(e, delta_t, deg1, delta_deg1, delta_deg2)
 
