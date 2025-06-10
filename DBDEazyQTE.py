@@ -10,16 +10,18 @@ import win32gui
 import win32ui
 from PIL import Image
 
-# --- 配置参数 ---
 imgdir = "DBDimg/"
 delay_degree = 0
 crop_w, crop_h = 200, 200
+last_im_a = None
 region = [int((2560 - crop_w) / 2), int((1440 - crop_h) / 2), crop_w, crop_h]
 toggle = True
+keyboard_switch = True
 frame_rate = 60
 repair_speed = 330
 heal_speed = 300
 wiggle_speed = 230
+shot_delay = 0.006574
 press_and_release_delay = 0.003206
 color_sensitive = 125
 delay_pixel = 8
@@ -32,11 +34,13 @@ WHITE = np.array([255, 255, 255], dtype=np.uint8)
 RED = np.array([0, 0, 255], dtype=np.uint8)
 
 
-# --- 工具函数 ---
 def sleep(t):
     st = time.time()
-    while time.time() - st < t:
-        pass
+    while True:
+        offset = time.time() - st
+        if offset >= t:
+            # print(offset)
+            break
 
 
 def sleep_to(time_stamp):
@@ -144,7 +148,6 @@ def find_thickest_point(shape, target_points):
     return r_i, r_j, max_d
 
 
-# --- 优化后：白块检测 ---
 def find_square(im_array):
     if im_array is None:
         return None
@@ -192,9 +195,9 @@ def find_square(im_array):
         else:
             break
     if pre_d + post_d < 5:
-        # merciless storm 分支同原版
-        # …（保持原逻辑删除“过密点”后二次 find_thickest_point）
-        pass
+        print("merciless storm, skip")
+        return
+
     pre_white = (round(r_i - sinv * pre_d), round(r_j - cosv * pre_d))
     post_white = (round(r_i + sinv * post_d), round(r_j + cosv * post_d))
     new_white = (
